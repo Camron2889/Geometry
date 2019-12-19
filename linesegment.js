@@ -117,48 +117,6 @@
         
         return new Vector(interceptX, interceptY);
     };
-    
-    //function borrowed from https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-    proto.intersectsWith = function(otherSegment) {
-        
-        const onSegment = function(p, q, r) {
-            if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) &&
-                q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) {
-                return true;
-            };
-            return false;
-        };
-        const orientation = function(p, q, r) {
-            const val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
-            
-            if (val === 0) return 0; //colinear
-            return (val > 0) ? 1 : 2; //clock or counterclockwise
-        };
-        
-        const o1 = orientation(this.p0, this.p1, otherSegment.p0); 
-        const o2 = orientation(this.p0, this.p1, otherSegment.p1); 
-        const o3 = orientation(otherSegment.p0, otherSegment.p1, this.p0); 
-        const o4 = orientation(otherSegment.p0, otherSegment.p1, this.p1);
-        
-         // General case 
-        if (o1 !== o2 && o3 !== o4) 
-            return true; 
-      
-        // Special Cases 
-        // p1, q1 and p2 are colinear and p2 lies on segment p1q1 
-        if (o1 === 0 && onSegment(this.p0, otherSegment.p0, this.p1)) return true; 
-      
-        // p1, q1 and q2 are colinear and q2 lies on segment p1q1 
-        if (o2 === 0 && onSegment(this.p0, otherSegment.p1, this.p1)) return true; 
-      
-        // p2, q2 and p1 are colinear and p1 lies on segment p2q2 
-        if (o3 === 0 && onSegment(otherSegment.p0, this.p0, otherSegment.p1)) return true; 
-      
-         // p2, q2 and q1 are colinear and q1 lies on segment p2q2 
-        if (o4 === 0 && onSegment(otherSegment.p0, this.p1, otherSegment.p1)) return true; 
-      
-        return false; // Doesn't fall in any of the above cases
-    };
 
     //attach class to namespace
     geometry.LineSegment = LineSegment;

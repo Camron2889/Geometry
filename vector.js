@@ -13,13 +13,6 @@ this.geometry = this.geometry || {};
     
     const proto = Vector.prototype;
     
-    proto.set = function(x, y) {
-        this.x = x;
-        this.y = y;
-        
-        return this;
-    }
-    
     proto.rotate = function(t) {
         const cosT = Math.cos(t);
         const sinT = Math.sin(t);
@@ -40,16 +33,16 @@ this.geometry = this.geometry || {};
         return target;
     };
     
-    proto.add = function(otherV3) {
-        this.x += otherV3.x;
-        this.y += otherV3.y;
+    proto.add = function(otherVec) {
+        this.x += otherVec.x;
+        this.y += otherVec.y;
         
         return this;
     };
     
-    proto.subtract = function(otherV3) {
-        this.x -= otherV3.x;
-        this.y -= otherV3.y;
+    proto.subtract = function(otherVec) {
+        this.x -= otherVec.x;
+        this.y -= otherVec.y;
         
         return this;
     };
@@ -73,6 +66,24 @@ this.geometry = this.geometry || {};
     
     proto.getUnitVector = function() {
         return this.clone().normalize();
+    };
+    
+    proto.getAngle = function() {
+        let angle = Math.atan(this.y / this.x);
+        
+        if (this.x >= 0) {
+            if (this.y < 0) {
+                angle += 2 * Math.PI;
+            }
+        } else {
+            angle += Math.PI;
+        }
+        
+        return angle;
+    };
+    
+    proto.dot = function(otherVec) {
+        return (this.x * otherVec.x) + (this.y * otherVec.y);
     };
     
     geometry.Vector = Vector;

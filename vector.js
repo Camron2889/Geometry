@@ -54,6 +54,13 @@ this.geometry = this.geometry || {};
         return this;
     };
     
+    proto.invert = function() {
+        this.x = -this.x;
+        this.y = -this.y;
+        
+        return this;
+    };
+    
     proto.normalize = function() {
         const magnitude = this.getMagnitude();
         this.scale(1 / magnitude);

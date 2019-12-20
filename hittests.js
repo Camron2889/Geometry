@@ -54,10 +54,10 @@
     HitTests.segmentSegment = function(seg0, seg1) {
         const slopeInt0 = seg0.getSlopeIntercept();
         const slopeInt1 = seg1.getSlopeIntercept();
-        const a = slopeInt0[0];
-        const b = slopeInt1[0];
-        const c = slopeInt0[1];
-        const d = slopeInt1[1];
+        const a = slopeInt0.slope;
+        const b = slopeInt1.slope;
+        const c = slopeInt0.yIntercept;
+        const d = slopeInt1.yIntercept;
         
         const interceptX = (d - c) / (a - b);
         const interceptY = (a * d - b * c) / (a - b);

@@ -65,15 +65,43 @@
         return new Vector(interceptX, interceptY);
     };
     
-    HitTests.checkRayCast = function(seg0, seg1) {
-        const angle = seg0.getAngle();
-        const testSegment = seg1.clone().translate(-seg0.p0.x, -seg0.p0.y).rotate(-angle);
+    HitTests.checkRayCast = function(raySeg, seg1) {
+        const angle = raySeg.getAngle();
+        const testSegment = seg1.clone();
+        testSegment.translate(raySeg.p0.clone().invert());
+        testSegment.rotateGlobal(-angle);
         const sign0 = (testSegment.p0.y >= 0) ? 1 : -1;
         const sign1 = (testSegment.p1.y >= 0) ? 1 : -1;
         if (sign0 !== sign1) {
-            return true
+            const length = testSegment.getRoot();
+            if (length > 1) {
+                return length;
+            }
         }
-        return false;
+        return null;
+    };
+    
+    HitTests.rayCast = function(raySeg, segments) {
+        const candidates = [];
+        for (let i = 0; i < segments.length; i++) {
+            const targetSeg = segments[i];
+            const rayLength = HitTests.checkRayCast(raySeg, targetSeg);
+            if (rayLength !== null) {
+                candidates.push([rayLength, targetSeg]);
+            }
+        }
+        
+        if (candidates.length === 0) return null;
+        
+        let closest = candidates[0];
+        for (let i = 1; i < candidates.length; i++) {
+            const currentCand = candidates[i];
+            if (currentCand[0] < closest[0]) {
+                closest = currentCand;
+            }
+        }
+        
+        return closest;
     };
     
     geometry.HitTests = HitTests;

@@ -104,18 +104,6 @@
         return [slope, intercept];
     };
     
-    proto.getIntersectionWith = function(otherSegment) {
-        const seg0 = this.getSlopeIntercept();
-        const seg1 = otherSegment.getSlopeIntercept();
-        const a = seg0[0];
-        const b = seg1[0];
-        const c = seg0[1];
-        const d = seg1[1];
-        
-        const interceptX = (d - c) / (a - b);
-        const interceptY = (a * d - b * c) / (a - b);
-        
-        return new Vector(interceptX, interceptY);
     };
 
     //attach class to namespace

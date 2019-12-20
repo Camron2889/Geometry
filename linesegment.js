@@ -106,7 +106,7 @@
     
     proto.getAngle = function() {
         const diffX = this.p1.x - this.p0.x;
-        const diffY = this.p1.y - this.p1.y;
+        const diffY = this.p1.y - this.p0.y;
         
         let angle = Math.atan(diffY / diffX);
         

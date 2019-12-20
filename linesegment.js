@@ -34,9 +34,9 @@
         return target;
     };
     
-    proto.translate = function(vector) {
-        this.p0.add(vector);
-        this.p1.add(vector);
+    proto.translate = function(vec) {
+        this.p0.add(vec);
+        this.p1.add(vec);
         
         return this;
     };
@@ -74,9 +74,9 @@
     
     proto.rotateCenter = function(t) {
         const mid = this.getMidpoint();
-        this.translate(-mid.x, -mid.y);
+        this.translate(mid.invert());
         this.rotateGlobal(t);
-        this.translate(mid.x, mid.y);
+        this.translate(mid.invert());
         
         return this;
     };

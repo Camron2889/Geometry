@@ -34,9 +34,35 @@
         return target;
     };
     
-    proto.translate = function(x, y) {
-        this.p0.add(x, y);
-        this.p1.add(x, y);
+    proto.translate = function(vector) {
+        this.p0.add(vector);
+        this.p1.add(vector);
+        
+        return this;
+    };
+    
+    proto.scale = function(s) {
+        this.p1.subtract(this.p0);
+        this.p1.scale(s);
+        this.p1.add(this.p0);
+        
+        return this;
+    };
+    
+    proto.normalize = function() {
+        this.p1.subtract(this.p0);
+        this.p1.normalize();
+        this.p1.add(this.p0);
+        
+        return this;
+    };
+    
+    proto.rotate = function(t) {
+        this.p1.subtract(this.p0);
+        this.p1.rotate(t);
+        this.p1.add(this.p0);
+        
+        return this;
     };
     
     proto.rotateGlobal = function(t) {

@@ -127,7 +127,7 @@
         const slope = diffY / diffX;
         const intercept = this.p0.y - slope * this.p0.x;
         
-        return [slope, intercept];
+        return { slope: slope, yIntercept: intercept };
     };
     
     proto.getRoot = function() {

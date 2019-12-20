@@ -130,6 +130,12 @@
         return [slope, intercept];
     };
     
+    proto.getRoot = function() {
+        if (this.p0.x === this.p1.x) {
+            return this.p0.x;
+        }
+        const line = this.getSlopeIntercept();
+        return -(line.yIntercept / line.slope);
     };
 
     //attach class to namespace

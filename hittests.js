@@ -11,7 +11,7 @@
     const HitTests = {};
     
     //function borrowed from https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-    HitTests.checkSegmentSegment = function(seg1, seg2) {
+    HitTests.checkSegSeg = function(seg1, seg2) {
         const onSegment = function(p, q, r) {
             if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) &&
                 q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) {
@@ -51,7 +51,7 @@
         return false; // Doesn't fall in any of the above cases
     };
     
-    HitTests.segmentSegment = function(seg0, seg1) {
+    HitTests.segSeg = function(seg0, seg1) {
         const slopeInt0 = seg0.getSlopeIntercept();
         const slopeInt1 = seg1.getSlopeIntercept();
         const a = slopeInt0.slope;

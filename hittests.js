@@ -74,7 +74,7 @@
         const sign1 = (testSegment.p1.y >= 0) ? 1 : -1;
         if (sign0 !== sign1) {
             const length = testSegment.getRoot();
-            if (length > 1) {
+            if (length > 0.000001) {
                 return length;
             }
         }

@@ -104,5 +104,21 @@
         return closest;
     };
     
+    HitTests.rayBounce = function(raySeg, segments) {
+        const cast = HitTests.rayCast(raySeg, segments);
+        if (!cast) return null;
+        
+        const path = raySeg.clone().normalize().scale(cast[0]);
+        
+        const rayAngle = raySeg.getAngle();
+        const wallAngle = cast[1].getAngle();
+        const reflectionAngle = 2 * wallAngle - rayAngle;
+        
+        const reflectionVector = new Vector(1, 0);
+        reflectionVector.rotate(reflectionAngle);
+        const newRay = new LineSegment(path.p1, path.p1.clone().add(reflectionVector));
+        return newRay;
+    };
+    
     geometry.HitTests = HitTests;
 })();

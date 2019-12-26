@@ -14,7 +14,7 @@
         for (let i = 0; i < this.vertices.length; i++) {
             const v0 = this.vertices[i];
             const v1 = this.vertices[(i + 1) % this.vertices.length];
-            this.vertices.push(new LineSegment(v0, v1));
+            this.edges.push(new LineSegment(v0, v1));
         }
     };
 
@@ -29,7 +29,7 @@
         for (let i = 0; i < target.vertices.length; i++) {
             const v0 = target.vertices[i];
             const v1 = target.vertices[(i + 1) % target.vertices.length];
-            target.vertices.push(new LineSegment(v0, v1));
+            target.edges.push(new LineSegment(v0, v1));
         }
         
         return target;

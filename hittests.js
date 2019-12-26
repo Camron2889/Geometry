@@ -65,29 +65,24 @@
         return new Vector(interceptX, interceptY);
     };
     
-    HitTests.checkRayCast = function(raySeg, seg1) {
-        const angle = raySeg.getAngle();
-        const testSegment = seg1.clone();
-        testSegment.translate(raySeg.p0.clone().invert());
-        testSegment.rotateGlobal(-angle);
-        const sign0 = (testSegment.p0.y >= 0) ? 1 : -1;
-        const sign1 = (testSegment.p1.y >= 0) ? 1 : -1;
-        if (sign0 !== sign1) {
-            const length = testSegment.getRoot();
-            if (length > 0.000001) {
-                return length;
-            }
-        }
-        return null;
-    };
-    
     HitTests.rayCast = function(raySeg, segments) {
         const candidates = [];
         for (let i = 0; i < segments.length; i++) {
             const targetSeg = segments[i];
-            const rayLength = HitTests.checkRayCast(raySeg, targetSeg);
-            if (rayLength !== null) {
-                candidates.push([rayLength, targetSeg]);
+            
+            const testSeg = targetSeg.clone();
+            testSeg.translate(raySeg.p0.clone().invert());
+            const angle = raySeg.getAngle();
+            testSeg.rotateGlobal(-angle);
+            
+            const sign0 = (testSeg.p0.y >= 0) ? 1 : -1;
+            const sign1 = (testSeg.p1.y >= 0) ? 1 : -1;
+            
+            if (sign0 !== sign1) {
+                const length = testSeg.getRoot();
+                if (length > 0.000001) {
+                    candidates.push([length, targetSeg]);
+                }
             }
         }
         

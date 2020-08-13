@@ -1,4 +1,4 @@
-//requires: vector.js
+//requires: Polygon
 
 //singleton
 (function() {
@@ -11,7 +11,7 @@
     const HitTests = {};
     
     //function borrowed from https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-    HitTests.checkSegSeg = function(seg1, seg2) {
+    HitTests.checkSegSeg = function(seg0, seg1) {
         const onSegment = function(p, q, r) {
             if (q.x <= Math.max(p.x, r.x) && q.x >= Math.min(p.x, r.x) &&
                 q.y <= Math.max(p.y, r.y) && q.y >= Math.min(p.y, r.y)) {
@@ -32,8 +32,7 @@
         const o4 = orientation(seg1.p0, seg1.p1, seg0.p1);
         
          // General case 
-        if (o1 !== o2 && o3 !== o4) 
-            return true; 
+        if (o1 !== o2 && o3 !== o4) return true; 
       
         // Special Cases 
         // p1, q1 and p2 are colinear and p2 lies on segment p1q1 
@@ -144,6 +143,7 @@
         const newRay = new LineSegment(path.p1, path.p1.clone().add(reflectionVector));
         return newRay;
     };
+
     
     geometry.HitTests = HitTests;
 })();

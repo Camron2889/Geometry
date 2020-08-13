@@ -65,6 +65,36 @@
         return new Vector(interceptX, interceptY);
     };
     
+    HitTests.checkPolySeg = function(poly, seg) {
+        for (let i = 0; i < poly.edges.length; i++) {
+            const edge = poly.edges[i];
+            if (HitTests.checkSegSeg(seg, edge)) {
+                return true;
+            }
+        }
+    };
+    
+    HitTests.polySeg = function(poly, seg) {
+        const collisions = [];
+        for (let i = 0; i < poly.edges.length; i++) {
+            const edge = poly.edges[i];
+            if (HitTests.checkSegSeg(seg, edge)) {
+                const collisionPos = HitTests.segSeg(seg, edge);
+                collisions.push([edge, collisionPos]);
+            }
+        }
+        return collisions;
+    };
+    
+    HitTests.checkPolyPoly = function(poly0, poly1) {
+        for (let i = 0; i < poly1.edges.length; i++) {
+            const edge = poly1.edges[i];
+            if (HitTests.checkPolySeg(poly0, edge)) {
+                return true;
+            }
+        }
+    };
+    
     HitTests.rayCast = function(raySeg, segments) {
         const candidates = [];
         for (let i = 0; i < segments.length; i++) {

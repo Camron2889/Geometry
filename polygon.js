@@ -1,4 +1,4 @@
-//requires: Vector
+//requires: Vector LineSegment
 
 (function() {
     "use strict";
@@ -43,7 +43,15 @@
         return this;
     };
     
-    proto.rotateGlobal = function(t) {
+    proto.scale = function(s) {
+        for (let i = 0; i < this.vertices.length; i++) {
+            this.vertices[i].scale(s);
+        }
+        
+        return this;
+    };
+    
+    proto.rotate = function(t) {
         for (let i = 0; i < this.vertices.length; i++) {
             this.vertices[i].rotate(t);
         }
@@ -58,15 +66,6 @@
         }
         midPoint.scale(1 / this.vertices.length);
         return midPoint;
-    };
-    
-    proto.rotateCenter = function(t) {
-        const mid = this.getMidpoint();
-        this.translate(-mid.x, -mid.y);
-        this.rotateGlobal(t);
-        this.translate(mid.x, mid.y);
-        
-        return this;
     };
 
     //attach class to namespace

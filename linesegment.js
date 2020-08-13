@@ -49,6 +49,13 @@
         return this;
     };
     
+    proto.scaleGlobal = function(s) {
+        this.p0.scale(s);
+        this.p1.scale(s);
+        
+        return this;
+    };
+    
     proto.normalize = function() {
         this.p1.subtract(this.p0);
         this.p1.normalize();

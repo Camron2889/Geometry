@@ -93,5 +93,10 @@ this.geometry = this.geometry || {};
         return (this.x * otherVec.x) + (this.y * otherVec.y);
     };
     
+    proto.fromLerp = function(v0, v1, ratio) {
+        this.x = (v1.x - v0.x) * ratio + v0.x;
+        this.y = (v1.y - v0.y) * ratio + v0.y;
+    };
+    
     geometry.Vector = Vector;
 })();

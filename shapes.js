@@ -1,4 +1,4 @@
-//requires: Vector
+//requires: Polygon
 
 (function() {
     "use strict";
@@ -15,8 +15,8 @@
         const verts = [];
         verts.push(new Vector(x, y));
         verts.push(new Vector(x + w, y));
-        verts.push(new Vector(x + w, y + w));
-        verts.push(new Vector(x, y + w));
+        verts.push(new Vector(x + w, y + h));
+        verts.push(new Vector(x, y + h));
         return new Polygon(verts);
     };
     
